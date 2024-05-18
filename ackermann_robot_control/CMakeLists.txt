@@ -22,7 +22,7 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY launch config description/urdf description/ros2_control
+  DIRECTORY launch config description/urdf description/ros2_control description/world
   DESTINATION share/${PROJECT_NAME}
 )
 

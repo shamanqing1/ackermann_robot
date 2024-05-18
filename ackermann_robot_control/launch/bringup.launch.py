@@ -53,6 +53,12 @@ def generate_launch_description():
         parameters=[robot_description],
     )
 
+    declare_world_cmd = DeclareLaunchArgument(
+        name='world',
+        default_value=  PathJoinSubstitution([FindPackageShare("ackermann_robot_control"), "world", "caffe.world"]),
+        description='Full path to the world model file to load'
+    )
+
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
@@ -65,7 +71,8 @@ def generate_launch_description():
 
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                     arguments=['-topic', 'robot_description',
-                                '-entity', 'ackermann_robot'],
+                                '-entity', 'ackermann_robot',
+                                '-z', '0.15'],
                     output='screen')
 
 
@@ -109,6 +116,7 @@ def generate_launch_description():
 
     nodes = [
         robot_state_pub_node,
+        declare_world_cmd,
         gazebo,
         spawn_entity,
         joint_state_broadcaster_spawner,

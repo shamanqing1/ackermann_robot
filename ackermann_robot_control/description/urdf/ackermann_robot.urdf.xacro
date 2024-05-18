@@ -6,12 +6,15 @@
 
   <xacro:include filename="$(find ackermann_robot_description)/urdf/ackermann_robot.materials.xacro" />
 
+  <xacro:include filename="$(find ackermann_robot_control)/urdf/ackermann_robot.gazebo.xacro" />
+
   <xacro:include filename="$(find ackermann_robot_control)/ros2_control/ackermann_robot.ros2_control.xacro" />
 
   <xacro:include filename="$(find ackermann_robot_control)/urdf/ackermann_robot.transmission.xacro" />
 
 
   <xacro:ackermann_robot prefix="$(arg prefix)" />
+  <xacro:ackermann_robot_gazebo prefix="$(arg prefix)" />
   <xacro:ackermann_robot_ros2_control prefix="$(arg prefix)" />
   <xacro:steering_hinge_transmission name="$(arg prefix)left_steering_hinge" />
   <xacro:steering_hinge_transmission name="$(arg prefix)right_steering_hinge" />
@@ -21,6 +24,6 @@
   <xacro:wheel_transmission name="$(arg prefix)right_rear_wheel" />
 
 
-  <xacro:include filename="$(find ackermann_robot_control)/urdf/ackermann_robot.gazebo.xacro" />
+  
 
 </robot>
