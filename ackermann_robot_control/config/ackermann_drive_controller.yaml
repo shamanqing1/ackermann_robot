@@ -15,6 +15,7 @@ joint_state_broadcaster:
 
 ackermann_steering_controller:
   ros__parameters:
+    update_rate: 50 # Hz
     reference_timeout: 2.0
     front_steering: true
     open_loop: false

@@ -7,10 +7,6 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from ament_index_python.packages import get_package_share_directory
-
-import os
-
 
 def generate_launch_description():
     # Declare arguments
@@ -51,12 +47,6 @@ def generate_launch_description():
         executable="robot_state_publisher",
         output="both",
         parameters=[robot_description],
-    )
-
-    declare_world_cmd = DeclareLaunchArgument(
-        name='world',
-        default_value=  PathJoinSubstitution([FindPackageShare("ackermann_robot_control"), "world", "caffe.world"]),
-        description='Full path to the world model file to load'
     )
 
     gazebo = IncludeLaunchDescription(
@@ -116,7 +106,6 @@ def generate_launch_description():
 
     nodes = [
         robot_state_pub_node,
-        declare_world_cmd,
         gazebo,
         spawn_entity,
         joint_state_broadcaster_spawner,

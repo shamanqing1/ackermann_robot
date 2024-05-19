@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(ackermann_robot_control)
+project(ackermann_robot_bringup)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,7 +7,11 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
+# uncomment the following section in order to fill in
+# further dependencies manually.
+# find_package(<dependency> REQUIRED)
+find_package(nav2_common REQUIRED)
+find_package(navigation2 REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -21,9 +25,11 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(
-  DIRECTORY launch config description/urdf description/ros2_control
-  DESTINATION share/${PROJECT_NAME}
-)
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY maps DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY rviz DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY worlds DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY params DESTINATION share/${PROJECT_NAME})
+# install(DIRECTORY urdf DESTINATION share/${PROJECT_NAME})
 
 ament_package()
